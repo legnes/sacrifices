@@ -1,5 +1,4 @@
 (function() {
-
 var conversationElt, messageInputElt;
 
 function getAndClearInputMessage() {
@@ -9,7 +8,48 @@ function getAndClearInputMessage() {
 }
 
 function getResponse(sent) {
+  //sent = replaceLong(sent, 4);
   return sent + '?';
+}
+
+function replaceLetters(sentence, letter){
+  var words = getWords(sentence);
+  newSentence = '';
+  for(i = 0; i < words.length; i++){
+    word = words[i];
+    if(word[0]==letter){
+
+      newSentence = newSentence + " " + randomRhyme(word);
+    } else{
+      newSentence = newSentence + " " + word
+    }
+  }
+  return newSentence
+}
+
+function replaceLong(sentence, len){
+  var words = getWords(sentence);
+  newSentence = '';
+  for(i = 0; i < words.length; i++){
+    word = words[i];
+    if(word.length>len){
+
+      newSentence = newSentence + " " + randomRhyme(word);
+    } else{
+      newSentence = newSentence + " " + word
+    }
+  }
+  return newSentence
+}
+
+function randomRhyme(word){
+  var rhymes = pronouncing.rhymes(word);
+  let ind = Math.floor(Math.random()*rhymes.length);
+  return rhymes[ind];
+}
+
+function getWords(sentence){
+  return sentence.split(" ");
 }
 
 function translateMessage(message) {
