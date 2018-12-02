@@ -8,7 +8,7 @@ function getAndClearInputMessage() {
 }
 
 function getResponse(sent) {
-  //sent = replaceLong(sent, 4);
+  sent = replaceLong(sent, 4);
   return sent + '?';
 }
 
@@ -56,8 +56,12 @@ function translateMessage(message) {
   return message;
 }
 
-function displayMessage(message, isRight) {
-  conversationElt.innerHTML += `<div class="message ${isRight ? '-right' : '-left'}"><div class="balloon ${isRight ? 'from-right' : 'from-left'}">${message}</div></div>`;
+function displayMessage(message, senderName, isRight) {
+  var imageHTML = senderName ? `<img src="assets/${senderName}.jpg"></img>` : '';
+  var balloonHTML = `<div class="balloon ${isRight ? 'from-right' : 'from-left'}">${message}</div>`
+  var messageHTML = `<div class="message ${isRight ? '-right' : '-left'}">${isRight ? (balloonHTML + imageHTML) : (imageHTML + balloonHTML)}</div>`
+  conversationElt.innerHTML += messageHTML;
+
   conversationElt.scrollTop = conversationElt.scrollHeight;
 }
 
@@ -65,11 +69,11 @@ function processMessages() {
   // send
   var sent = getAndClearInputMessage();
   sent = translateMessage(sent);
-  displayMessage(sent, false);
+  displayMessage(sent, 'player', false);
 
   // respond
   var response = getResponse(sent);
-  displayMessage(response, true);
+  displayMessage(response, 'cp1', true);
 }
 
 function initInputs() {
