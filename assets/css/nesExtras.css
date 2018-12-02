@@ -1,0 +1,44 @@
+.container:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+div.containers > .container {
+  display: inline-block;
+  max-width: 400px;
+}
+
+.balloon.container .balloon {
+  max-width: 600px;
+  margin: 1rem 2rem 2rem 2rem
+}
+
+.balloon.container .messages {
+  display: flex;
+  flex-direction: column;
+}
+.balloon.container .message {
+  display: flex;
+  flex-shrink: 0;
+}
+.balloon.container .message i {
+  align-self: flex-end;
+}
+.balloon.container .message.-left {
+  align-self: flex-start;
+}
+.balloon.container .message.-right {
+  align-self: flex-end;
+}
+
+.form.container > .field:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.footer {
+  text-align: center;
+}
+.footer a {
+  color: #333;
+  text-decoration: none;
+}
+

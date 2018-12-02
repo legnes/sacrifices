@@ -16,8 +16,8 @@ function translateMessage(message) {
   return message;
 }
 
-function displayMessage(message) {
-  conversationElt.innerHTML += message + '<br />';
+function displayMessage(message, isRight) {
+  conversationElt.innerHTML += `<div class="message ${isRight ? '-right' : '-left'}"><div class="balloon ${isRight ? 'from-right' : 'from-left'}">${message}</div></div>`;
   conversationElt.scrollTop = conversationElt.scrollHeight;
 }
 
@@ -25,11 +25,11 @@ function processMessages() {
   // send
   var sent = getAndClearInputMessage();
   sent = translateMessage(sent);
-  displayMessage(sent);
+  displayMessage(sent, false);
 
   // respond
   var response = getResponse(sent);
-  displayMessage(response);
+  displayMessage(response, true);
 }
 
 function initInputs() {
