@@ -8,7 +8,7 @@ function getAndClearInputMessage() {
 }
 
 function getResponse(sent) {
-  //sent = replaceLetters(sent, 'm')
+  //sent = replaceLong(sent, 4)
   return sent + '?';
 }
 
@@ -18,12 +18,34 @@ function replaceLetters(sentence, letter){
   for(i = 0; i < words.length; i++){
     word = words[i];
     if(word[0]==letter){
-      newSentence = newSentence + " " + pronouncing.rhymes(word)[0];
+      
+      newSentence = newSentence + " " + randomRhyme(word);
     } else{
       newSentence = newSentence + " " + word
     }
   }
   return newSentence
+}
+
+function replaceLong(sentence, len){
+  var words = getWords(sentence);
+  newSentence = '';
+  for(i = 0; i < words.length; i++){
+    word = words[i];
+    if(word.length>len){
+      
+      newSentence = newSentence + " " + randomRhyme(word);
+    } else{
+      newSentence = newSentence + " " + word
+    }
+  }
+  return newSentence
+}
+
+function randomRhyme(word){
+  var rhymes = pronouncing.rhymes(word);
+  let ind = Math.floor(Math.random()*rhymes.length);
+  return rhymes[ind];
 }
 
 function getWords(sentence){
