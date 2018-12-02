@@ -3,24 +3,26 @@
   <title>sacrifices must be made</title>
   <link href="https://unpkg.com/nes.css@0.0.2/css/nes.min.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="assets/css/nesExtras.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/game.css">
   <script type="text/javascript" src="assets/js/main.js"></script>
-  <style>
-    #conversation {
-      height: 70%;
-      overflow-y: scroll;
-      overflow-wrap: break-word;
-    }
-  </style>
 </head>
 <body>
-  <div class="container with-title">
-    <h2 class="title">convo</h2>
-    <div class="balloon container">
-      <div id="conversation" class="messages">
+  <div class="game-wrapper">
+    <div class="container with-title chat-container">
+      <h2 class="title">chat</h2>
+      <div class="balloon container balloons-wrapper">
+        <div id="conversation" class="messages messages-wrapper">
+        </div>
+      </div>
+      <div class="message-input-wrapper">
+        <textarea id="messageInput" class="input message-input"></textarea>
       </div>
     </div>
-    <div>
-      <textarea id="messageInput" class="input"></textarea>
+    <div class="container with-title circuitboard-container">
+      <h2 class="title">circuitboard</h2>
+    </div>
+    <div class="container with-title display-container">
+      <h2 class="title">display</h2>
     </div>
   </div>
 </body>
