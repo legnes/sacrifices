@@ -1,5 +1,4 @@
 (function() {
-
 var conversationElt, messageInputElt;
 
 function getAndClearInputMessage() {
@@ -9,7 +8,26 @@ function getAndClearInputMessage() {
 }
 
 function getResponse(sent) {
+  //sent = replaceLetters(sent, 'm')
   return sent + '?';
+}
+
+function replaceLetters(sentence, letter){
+  var words = getWords(sentence);
+  newSentence = '';
+  for(i = 0; i < words.length; i++){
+    word = words[i];
+    if(word[0]==letter){
+      newSentence = newSentence + " " + pronouncing.rhymes(word)[0];
+    } else{
+      newSentence = newSentence + " " + word
+    }
+  }
+  return newSentence
+}
+
+function getWords(sentence){
+  return sentence.split(" ");
 }
 
 function translateMessage(message) {
