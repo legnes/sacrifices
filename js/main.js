@@ -101,6 +101,10 @@ function processMessages() {
   displayMessage(response, 'cp1', true);
 }
 
+function updateChipCount(val) {
+  chipCounterElt.innerHTML = `Remaining chips: ${val}`;
+}
+
 chipLimit = function() {
   var chipCount = 0;
   for (var i = 0; i < chipInputElts.length; i++) {
@@ -108,13 +112,17 @@ chipLimit = function() {
     chipInputs[chipInputElt.name] = chipInputElt.checked;
     if (chipInputElt.checked) chipCount++;
   }
+
   if (chipCount > CHIP_LIMIT) {
     // Clear all
     // TODO: just disable beforehand?
     for (var i = 0; i < chipInputElts.length; i++) {
       chipInputElts[i].checked = false;
     }
+    chipCount = 0;
   }
+
+  updateChipCount(CHIP_LIMIT - chipCount);
 }
 
 function initInputs() {
@@ -131,6 +139,9 @@ function initInputs() {
   for (var i = 0; i < chipInputElts; i++) {
     chipInputs[chipInputElts[i].name] = false;
   }
+
+
+  updateChipCount(CHIP_LIMIT);
 }
 
 function init() {
