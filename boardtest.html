@@ -1,0 +1,103 @@
+<script>
+//	var chipsDisplay = 0;
+//	var pstatus = document.getElementById('pwords').checked;
+//	var vstatus = document.getElementById('vwords').checked;
+//	var roomstatus = document.getElementById('roomwords').checked;
+//	var fstatus = document.getElementById('fwords').checked;
+	function garble(string){
+		var garbledString = ""
+		for (i = 0; i < string.length; i++){
+			garbledString = garbledString + "*";
+		}
+		return garbledString;
+	}
+
+	function uncheckAll(){
+		document.getElementById('pwords').checked = false;
+		document.getElementById('vwords').checked = false;
+		document.getElementById('roomwords').checked = false;
+		document.getElementById('fwords').checked = false;
+		pstatus = false;
+		vstatus = false;
+		roomstatus = false;
+		fstatus = false;
+	}
+	
+	function chipLimit(){
+		var chips = 0;
+		if (document.getElementById('pwords').checked){
+			chips +=1;
+			}
+		if (document.getElementById('vwords').checked){
+			chips +=1;
+		}
+		if (document.getElementById('roomwords').checked){
+			chips+=1;
+		}
+		if (document.getElementById('fwords').checked){
+			chips+=1;
+		}
+//		if(pstatus==true){
+//			chips+=1;
+//		}
+//		if(vstatus==true){
+//			chips+=1;
+//		}
+//		if(roomstatus==true){
+//			chips+=1;
+//		}
+//		if(fstatus==true){
+//			chips+=1;
+//		}
+		if (chips == 4){
+			alert("Just 3!");
+			uncheckAll();
+		}
+	}
+
+function sendMsg(){
+	var output = "";
+	var input = document.getElementById('message').value;
+	var pstatus = document.getElementById('pwords').checked;
+	var vstatus = document.getElementById('vwords').checked;
+	var roomstatus = document.getElementById('roomwords').checked;
+	var fstatus = document.getElementById('fwords').checked;
+	
+	if(pstatus==false){
+		var message = input.split(' ');
+		for (i=0; i<message.length; i++){
+			if (message[i].startsWith("p","P")){
+				output = output + ' ' + garble(message[i]);
+			}
+			else{
+				output = output + ' ' + message[i];
+			}
+		}
+	}
+//	document.getElementById("messageField").innerHTML = input;
+	document.getElementById("messageField").innerHTML = output;
+
+}
+</script>
+
+<b>(You get three:)</b>
+</br>
+Words that start with P
+<input type="checkbox" onchange="chipLimit()" name="pwords" id="pwords">
+</br>
+Words shorter than 5 letters
+<input type="checkbox" onchange="chipLimit()" name="vwords" id="vwords">
+</br>
+Words that rhyme with "room"
+<input type="checkbox" onchange="chipLimit()" name="roomwords" id="roomwords">
+</br>
+Words that don't have F in them
+<input type="checkbox"  onchange="chipLimit()" name="fwords" id="fwords">
+</br>
+<input type="text" name="message" id="message"><input type="button" onclick="sendMsg()" value="Send">
+<!--
+<div id = "chipCount" style="background-color:FF44B9; max-width:300px; height:30px">Chips = <script>document.write(chipsDisplay)</script> </div> 
+-->
+<div id = "messageField" style="background-color:FFDAB9; max-width:300px; height:80px"></div>
+
+
