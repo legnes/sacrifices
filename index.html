@@ -22,6 +22,14 @@
     </div>
     <div class="container with-title circuitboard-container">
       <h2 class="title">circuitboard</h2>
+      <div>[Instructions go here]</div>
+      <div id="chipCounter"></div>
+      <div>
+        <label><input type="checkbox" class="checkbox chip-input" onchange="chipLimit()" name="pwords"><span>Words that start with P</span></label>
+        <label><input type="checkbox" class="checkbox chip-input" onchange="chipLimit()" name="vwords"><span>Words shorter than 5 letters</span></label>
+        <label><input type="checkbox" class="checkbox chip-input" onchange="chipLimit()" name="roomwords"><span>Words that rhyme with "room"</span></label>
+        <label><input type="checkbox"  class="checkbox chip-input" onchange="chipLimit()" name="fwords"><span>Words that don't have F in them</span></label>
+      </div>
     </div>
     <div class="container with-title display-container">
       <h2 class="title">display</h2>

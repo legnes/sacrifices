@@ -1,5 +1,9 @@
+var chipLimit;
+
 (function() {
-var conversationElt, messageInputElt;
+var CHIP_LIMIT = 3;
+var conversationElt, messageInputElt, chipCounterElt, chipInputElts;
+var chipInputs = {};
 
 function getAndClearInputMessage() {
   var res = messageInputElt.value;
@@ -53,8 +57,28 @@ function getWords(sentence){
   return sentence.split(" ");
 }
 
+function garble(string){
+  var garbledString = ""
+  for (i = 0; i < string.length; i++){
+    garbledString = garbledString + "*";
+  }
+  return garbledString;
+}
+
 function translateMessage(message) {
-  return message;
+  var messageWords = getWords(message);
+
+  // TODO: Other rules!
+  if(chipInputs.pwords==false){
+    // TODO: Use a regex?
+    for (var i=0; i<messageWords.length; i++){
+      if (messageWords[i].startsWith("p","P")){
+        messageWords[i] = garble(messageWords[i]);
+      }
+    }
+  }
+
+  return messageWords.join(' ');
 }
 
 function displayMessage(message, senderName, isRight) {
@@ -77,6 +101,22 @@ function processMessages() {
   displayMessage(response, 'cp1', true);
 }
 
+chipLimit = function() {
+  var chipCount = 0;
+  for (var i = 0; i < chipInputElts.length; i++) {
+    var chipInputElt = chipInputElts[i];
+    chipInputs[chipInputElt.name] = chipInputElt.checked;
+    if (chipInputElt.checked) chipCount++;
+  }
+  if (chipCount > CHIP_LIMIT) {
+    // Clear all
+    // TODO: just disable beforehand?
+    for (var i = 0; i < chipInputElts.length; i++) {
+      chipInputElts[i].checked = false;
+    }
+  }
+}
+
 function initInputs() {
   // TODO: add other input handling here e.g. circuitboard
   window.addEventListener('keydown', function(evt) {
@@ -87,11 +127,17 @@ function initInputs() {
         return false;
     }
   });
+
+  for (var i = 0; i < chipInputElts; i++) {
+    chipInputs[chipInputElts[i].name] = false;
+  }
 }
 
 function init() {
   conversationElt = document.getElementById('conversation');
   messageInputElt = document.getElementById('messageInput');
+  chipCounterElt = document.getElementById('chipCounter');
+  chipInputElts = document.getElementsByClassName('chip-input');
   initInputs();
 }
 
