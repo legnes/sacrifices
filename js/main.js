@@ -8,7 +8,8 @@ function getAndClearInputMessage() {
 }
 
 function getResponse(sent) {
-  sent = replaceLong(sent, 4);
+  //sent = replaceLong(sent, 4);
+  sent = replaceLetters(sent, 'p')
   return sent + '?';
 }
 
@@ -19,7 +20,7 @@ function replaceLetters(sentence, letter){
     word = words[i];
     if(word[0]==letter){
 
-      newSentence = newSentence + " " + randomRhyme(word);
+      newSentence = newSentence + " " + "***"; //randomRhyme(word);
     } else{
       newSentence = newSentence + " " + word
     }
